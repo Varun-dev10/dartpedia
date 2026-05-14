@@ -4,28 +4,9 @@ import 'package:command_runner/command_runner.dart';
 
 const version = '1.2.3.1';
 
-void main(List<String> arguments) {
-  // var object = help();   // object of help class
-
-      if (arguments.isEmpty || arguments.first == 'help') {
-        // print("hello dude");
-        //help.arguments(); // can only be called in this way when void help is declared static
-        printUsage(); // function call
-        //object.wihtout_static();    // cobject call
-      } else if (arguments.first == 'version') {
-        print('current version : $version');
-      } else if (arguments.first == 'search') {
-        final inputArgs = arguments.length > 1
-            ? arguments.sublist(1)
-            : null; // sublist(0) this creates a sub list which take all argument starting from first index
-        searchWikipedia(inputArgs); // searchWikipedia call needs no await here
-        // print(arguments.length);
-      } else {
-        printUsage();
-      }
-  //   for (int n = 0; n< 5;  n++ ){
-  //    print("loop:: $n");
-  //  }
+void main(List<String> arguments) async { // main is now async and awaits the runner
+  var runner = CommandRunner(); // Create an instance of your new CommandRunner
+  await runner.run(arguments); // Call its run method, awaiting its Future<void>
 }
 
 void searchWikipedia(List<String>? arguments) async {
@@ -78,7 +59,7 @@ void printUsage() {
 // class help{
 //     print('this is function call for help ');
 //  }
-//     void wihtout_static(){
-//     print(' wtithout static call');   // needs an objetc to cal
+//     void without_static(){
+//     print(' without static call');   // needs an object to cal
 //     }
 // }
